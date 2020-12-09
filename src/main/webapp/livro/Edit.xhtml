@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LivroEditDlg" widgetVar="LivroEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLivroTitle}">
+            <h:form id="LivroEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{livroController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLivroLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{livroController.selected.id}" title="#{bundle.EditLivroTitle_id}" required="true" requiredMessage="#{bundle.EditLivroRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditLivroLabel_titulo}" for="titulo" />
+                        <p:inputText id="titulo" value="#{livroController.selected.titulo}" title="#{bundle.EditLivroTitle_titulo}" required="true" requiredMessage="#{bundle.EditLivroRequiredMessage_titulo}"/>
+                        <p:outputLabel value="#{bundle.EditLivroLabel_autor}" for="autor" />
+                        <p:inputText id="autor" value="#{livroController.selected.autor}" title="#{bundle.EditLivroTitle_autor}" required="true" requiredMessage="#{bundle.EditLivroRequiredMessage_autor}"/>
+                        <p:outputLabel value="#{bundle.EditLivroLabel_resumo}" for="resumo" />
+                        <p:inputText id="resumo" value="#{livroController.selected.resumo}" title="#{bundle.EditLivroTitle_resumo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{livroController.update}" value="#{bundle.Save}" update="display,:LivroListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LivroEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LivroEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

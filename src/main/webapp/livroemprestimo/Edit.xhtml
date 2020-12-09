@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LivroemprestimoEditDlg" widgetVar="LivroemprestimoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLivroemprestimoTitle}">
+            <h:form id="LivroemprestimoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{livroemprestimoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLivroemprestimoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{livroemprestimoController.selected.id}" title="#{bundle.EditLivroemprestimoTitle_id}" required="true" requiredMessage="#{bundle.EditLivroemprestimoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditLivroemprestimoLabel_idLivro}" for="idLivro" />
+                        <p:selectOneMenu id="idLivro" value="#{livroemprestimoController.selected.idLivro}" required="true" requiredMessage="#{bundle.EditLivroemprestimoRequiredMessage_idLivro}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{livroController.itemsAvailableSelectOne}"
+                                           var="idLivroItem"
+                                           itemValue="#{idLivroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLivroemprestimoLabel_idEmprestimo}" for="idEmprestimo" />
+                        <p:selectOneMenu id="idEmprestimo" value="#{livroemprestimoController.selected.idEmprestimo}" required="true" requiredMessage="#{bundle.EditLivroemprestimoRequiredMessage_idEmprestimo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{emprestimoController.itemsAvailableSelectOne}"
+                                           var="idEmprestimoItem"
+                                           itemValue="#{idEmprestimoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{livroemprestimoController.update}" value="#{bundle.Save}" update="display,:LivroemprestimoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LivroemprestimoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LivroemprestimoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

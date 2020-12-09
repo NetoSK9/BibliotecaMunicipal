@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmprestimoCreateDlg" widgetVar="EmprestimoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmprestimoTitle}">
+            <h:form id="EmprestimoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{emprestimoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{emprestimoController.selected.id}" title="#{bundle.CreateEmprestimoTitle_id}" required="true" requiredMessage="#{bundle.CreateEmprestimoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_dataEmprestimo}" for="dataEmprestimo" />
+                        <p:calendar id="dataEmprestimo" pattern="MM/dd/yyyy" value="#{emprestimoController.selected.dataEmprestimo}" title="#{bundle.EditEmprestimoTitle_dataEmprestimo}" required="true" requiredMessage="#{bundle.EditEmprestimoRequiredMessage_dataEmprestimo}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_dataDevolucao}" for="dataDevolucao" />
+                        <p:calendar id="dataDevolucao" pattern="MM/dd/yyyy" value="#{emprestimoController.selected.dataDevolucao}" title="#{bundle.EditEmprestimoTitle_dataDevolucao}" required="true" requiredMessage="#{bundle.EditEmprestimoRequiredMessage_dataDevolucao}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_dataOcorreuDevolucao}" for="dataOcorreuDevolucao" />
+                        <p:calendar id="dataOcorreuDevolucao" pattern="MM/dd/yyyy" value="#{emprestimoController.selected.dataOcorreuDevolucao}" title="#{bundle.EditEmprestimoTitle_dataOcorreuDevolucao}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_multa}" for="multa" />
+                        <p:inputText id="multa" value="#{emprestimoController.selected.multa}" title="#{bundle.CreateEmprestimoTitle_multa}" />
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_idFuncionario}" for="idFuncionario" />
+                        <p:selectOneMenu id="idFuncionario" value="#{emprestimoController.selected.idFuncionario}" required="true" requiredMessage="#{bundle.EditEmprestimoRequiredMessage_idFuncionario}">
+                            <f:selectItems value="#{funcionarioController.itemsAvailableSelectOne}"
+                                           var="idFuncionarioItem"
+                                           itemValue="#{idFuncionarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmprestimoLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{emprestimoController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditEmprestimoRequiredMessage_idUsuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{emprestimoController.create}" value="#{bundle.Save}" update="display,:EmprestimoListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmprestimoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmprestimoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

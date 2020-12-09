@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioEditDlg" widgetVar="UsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsuarioTitle}">
+            <h:form id="UsuarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{usuarioController.selected.id}" title="#{bundle.EditUsuarioTitle_id}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.EditUsuarioTitle_nome}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nome}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_cpf}" for="cpf" />
+                        <p:inputText id="cpf" value="#{usuarioController.selected.cpf}" title="#{bundle.EditUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cpf}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.EditUsuarioTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_telefone1}" for="telefone1" />
+                        <p:inputText id="telefone1" value="#{usuarioController.selected.telefone1}" title="#{bundle.EditUsuarioTitle_telefone1}" />
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_telefone2}" for="telefone2" />
+                        <p:inputText id="telefone2" value="#{usuarioController.selected.telefone2}" title="#{bundle.EditUsuarioTitle_telefone2}" />
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_dataNascimento}" for="dataNascimento" />
+                        <p:calendar id="dataNascimento" pattern="MM/dd/yyyy" value="#{usuarioController.selected.dataNascimento}" title="#{bundle.EditUsuarioTitle_dataNascimento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_rua}" for="rua" />
+                        <p:inputText id="rua" value="#{usuarioController.selected.rua}" title="#{bundle.EditUsuarioTitle_rua}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_rua}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_numeroRua}" for="numeroRua" />
+                        <p:inputText id="numeroRua" value="#{usuarioController.selected.numeroRua}" title="#{bundle.EditUsuarioTitle_numeroRua}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_numeroRua}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{usuarioController.selected.estado}" title="#{bundle.EditUsuarioTitle_estado}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_cidade}" for="cidade" />
+                        <p:inputText id="cidade" value="#{usuarioController.selected.cidade}" title="#{bundle.EditUsuarioTitle_cidade}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cidade}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_bairro}" for="bairro" />
+                        <p:inputText id="bairro" value="#{usuarioController.selected.bairro}" title="#{bundle.EditUsuarioTitle_bairro}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_bairro}"/>
+                        <p:outputLabel value="#{bundle.EditUsuarioLabel_senha}" for="senha" />
+                        <p:inputText id="senha" value="#{usuarioController.selected.senha}" title="#{bundle.EditUsuarioTitle_senha}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_senha}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
